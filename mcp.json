@@ -1,13 +1,9 @@
 {
-    "mcpServers": {
-      "filesystem": {
-        "command": "npx",
-        "args": [
-          "-y",
-          "@modelcontextprotocol/server-filesystem",
-          "C:\\Users\\sagra\\Desktop",
-          "C:\\Users\\sagra\\Downloads"
-        ]
-      }
+  "mcpServers": {
+    "multidescargas": {
+      "command": "python",
+      "args": ["C:/sallalili/youtube_sagrario/multidescargas_server.py"],
+      "env": { "PYTHONIOENCODING": "utf-8" }
     }
   }
+}
