@@ -1,16 +1,21 @@
-
+import os
 import subprocess
 
 def download_youtube_video(url):
     """
-    Descarga un vídeo de YouTube dada su URL.
+    Descarga un vídeo de YouTube dada su URL en la carpeta Descargas.
     """
     try:
+        # Obtener la carpeta Descargas del usuario
+        downloads_folder = os.path.join(os.path.expanduser("~"), "Descargas")
+        if not os.path.exists(downloads_folder):
+            os.makedirs(downloads_folder)
+
         # Usamos yt-dlp para la descarga. La opción -f best significa la mejor calidad.
         # La opción --no-playlist evita descargar listas de reproducción completas si se proporciona una URL de lista de reproducción.
-        command = ["yt-dlp", "-f", "best", "--no-playlist", url]
+        command = ["yt-dlp", "-f", "best", "--no-playlist", "-o", os.path.join(downloads_folder, "%(title)s.%(ext)s"), url]
         subprocess.run(command, check=True)
-        print(f"\nVídeo de {url} descargado exitosamente.")
+        print(f"\nVídeo de {url} descargado exitosamente en {downloads_folder}.")
     except subprocess.CalledProcessError as e:
         print(f"\nError al descargar el vídeo: {e}")
     except FileNotFoundError:
